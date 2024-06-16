@@ -1,0 +1,6 @@
+@AspektAssignment.Project_HostAddress = http://localhost:5262
+
+GET {{AspektAssignment.Project_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
