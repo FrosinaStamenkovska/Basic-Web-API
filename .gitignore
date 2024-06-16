@@ -1,0 +1,179 @@
+# Build Folders
+bin/
+obj/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+*.vspscc
+*.vssscc
+
+# User-specific files (Mono auto generated)
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Microsoft Azure Build Output
+csx/
+*.build.csdef
+
+# Publish Web Output
+*.Publish.xml
+*.azurePubxml
+# Note: Comment the next line if you have production secrets in the publish settings file.
+#*.pubxml
+*.publishproj
+
+# SQL Server files
+*.mdf
+*.ldf
+
+# Microsoft Azure Web App publish settings. Comment out if your project is non-cloud.
+# PublishProfiles/
+
+# Windows credential store
+*.AzureUserCloudConfig
+*.AzureActivityLog.json
+
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# JavaScript packages
+*.js.map
+
+# Log files
+*.log
+
+# Local history for JetBrains IDEs
+.idea/
+
+# Rider projects
+.idea/
+
+# VSTS Agent
+.vscode/
+
+# Local configuration files
+.vscode/
+
+# JetBrains Rider
+.idea/
+
+# NCrunch
+.ncrunch/
+.ncrunchsolution/
+
+# CodeRush
+.cr/
+
+# InstallShield output folder
+[Ee]xpress/
+
+# DocProject artifacts
+DocProject/buildhelp/
+DocProject/Help/*.HxT
+DocProject/Help/*.HxC
+DocProject/Help/*.Hxt
+DocProject/Help/*.HxK
+DocProject/Help/*.HxF
+DocProject/Help/Html2
+
+# DocFX artifact
+_docfx/
+
+# Visual Studio for Mac
+.vscode/
+.vscode-server/
+
+# SQL Server files
+*.mdf
+*.ldf
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# JetBrains Rider
+.idea/
+
+# Rider projects
+.idea/
+
+# local JetBrains Rider config
+.idea/
+
+# Crashlytics
+crashlytics-build.properties
+fabric.properties
+
+# Windows Store app package directories and files
+AppPackages/
+BundleArtifacts/
+Package.StoreAssociation.xml
+
+# Windows Phone app package directories and files
+AppPackages/
+BundleArtifacts/
+Package.StoreAssociation.xml
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Visual Studio Code
+.vscode/
+.history/
+
+# Local history for JetBrains IDEs
+.idea/
+
+# Rider projects
+.idea/
+
+# Rider config
+.idea/
+
+# DotNetToolSettings
+.dotnet_tools/
+.dotnet_tools/
+
+# Backup & report files from converting an old project file to a new project file.
+# # dotnet SDK 2.x
+*.csproj.vspscc
+*.sln.vspscc
+*.json
+*.npm-debug.log
+*.yarn-error.log
+*.dotnetproj/
+
+# End of .gitignore
