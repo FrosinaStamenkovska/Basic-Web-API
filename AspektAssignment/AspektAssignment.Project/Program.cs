@@ -1,4 +1,6 @@
 
+using AspektAssignment.Helpers.DependencyInjectionHelper;
+
 namespace AspektAssignment.Project
 {
     public class Program
@@ -13,6 +15,10 @@ namespace AspektAssignment.Project
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            DependencyInjectionHelper.InjectDbContext(builder.Services, builder.Configuration);
+            DependencyInjectionHelper.InjectRepositories(builder.Services);
+            DependencyInjectionHelper.InjectServices(builder.Services);
 
             var app = builder.Build();
 

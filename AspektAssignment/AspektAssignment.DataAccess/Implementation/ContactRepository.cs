@@ -19,7 +19,7 @@ namespace AspektAssignment.DataAccess.Implementation
 
         public async Task<List<Contact>> FilterContacts(int? countryId, int? companyId)
         {
-            var filteredContacts = await _dbContext.Contacts.ToListAsync();
+            var filteredContacts = await _dbContext.Contacts.Include(x => x.Company).Include(x => x.Country).ToListAsync();
 
 
             if (countryId != null)
@@ -32,7 +32,10 @@ namespace AspektAssignment.DataAccess.Implementation
                 filteredContacts = filteredContacts.Where(x => x.CompanyId == companyId).ToList();
             }
 
-            return filteredContacts;
+            if (!filteredContacts.Any()) throw new KeyNotFoundException();
+            
+                return filteredContacts;
+            
         }
 
     }

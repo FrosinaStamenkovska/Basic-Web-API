@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AspektAssignment.DataAccess\AspektAssignment.DataAccess.csproj" />
+    <ProjectReference Include="..\AspektAssignment.Domain\AspektAssignment.Domain.csproj" />
+    <ProjectReference Include="..\AspektAssignment.Dtos\AspektAssignment.Dtos.csproj" />
     <ProjectReference Include="..\AspektAssignment.Mappers\AspektAssignment.Mappers.csproj" />
   </ItemGroup>
 

@@ -19,8 +19,4 @@
     <ProjectReference Include="..\AspektAssignment.Helpers\AspektAssignment.Helpers.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

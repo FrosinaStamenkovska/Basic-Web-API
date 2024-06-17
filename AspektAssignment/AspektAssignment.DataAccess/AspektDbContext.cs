@@ -17,8 +17,32 @@ namespace AspektAssignment.DataAccess
         {
             base.OnModelCreating(modelBuilder);
 
-            // Relations
+            // Constraints
+            modelBuilder.Entity<Company>()
+                .Property(x => x.Name)
+                .HasMaxLength(100)
+                .IsRequired();
 
+            modelBuilder.Entity<Country>()
+                .Property(x => x.Name)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            modelBuilder.Entity<Contact>()
+                .Property(x => x.Name)
+                .HasMaxLength(100)
+                .IsRequired();
+
+            modelBuilder.Entity<Contact>()
+                .Property(x => x.CompanyId)
+                .IsRequired();
+
+            modelBuilder.Entity<Contact>()
+                .Property(x => x.CountryId)
+                .IsRequired();
+
+
+            // Relations
             modelBuilder.Entity<Company>()
                 .HasMany(x => x.Contacts)
                 .WithOne(x => x.Company)
@@ -29,12 +53,9 @@ namespace AspektAssignment.DataAccess
                 .WithOne(x => x.Country)
                 .HasForeignKey(x => x.CountryId);
 
-            // Constraints
-
 
 
             // Seeding
-
             modelBuilder.Entity<Company>().HasData(
                 new Company() { Id = 1, Name = "Apple"},
                 new Company() { Id = 2, Name = "Google" },
