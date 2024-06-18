@@ -1,5 +1,7 @@
 ﻿using AspektAssignment.Dtos.CountryDtos;
 using AspektAssignment.Services.Interface;
+using AspektAssignment.Services.Validations;
+using AspektAssignment.Shared.CustomExceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspektAssignment.Project.Controllers
@@ -30,13 +32,13 @@ namespace AspektAssignment.Project.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            if (id <= 0) return BadRequest("Invalid Id");
+            if (id <= 0) return BadRequest("Invalid Id!");
 
             try
             {
                 return Ok(await _countryService.GetById(id));
             }
-            catch (KeyNotFoundException ex)
+            catch (CountryNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
@@ -55,7 +57,7 @@ namespace AspektAssignment.Project.Controllers
             {
                 return Ok(await _countryService.GetCompanyStatisticsByCountryId(id));
             }
-            catch (KeyNotFoundException ex)
+            catch (CountryNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
@@ -68,11 +70,13 @@ namespace AspektAssignment.Project.Controllers
         [HttpPost("CreateCountry")]
         public async Task<IActionResult> CreateCountry(CreateCountryDto country)
         {
+            if (!NameValidation.IsNameValid(country.Name)) return BadRequest("Invalid Name!");
+
             try
             {
                 return Ok(await _countryService.Create(country));
             }
-            catch (ArgumentNullException ex)
+            catch (InvalidNameException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -85,15 +89,17 @@ namespace AspektAssignment.Project.Controllers
         [HttpPut("UpdateCountry")]
         public async Task<IActionResult> UpdateCountry(CountryDto country)
         {
+            if (!NameValidation.IsNameValid(country.Name)) return BadRequest("Invalid Name!");
+
             try
             {
                 return Ok(await _countryService.Update(country));
             }
-            catch (KeyNotFoundException ex)
+            catch (CountryNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch (ArgumentNullException ex)
+            catch (InvalidNameException ex)
             {
                 return BadRequest(ex.Message);
             }

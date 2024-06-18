@@ -3,6 +3,7 @@ using AspektAssignment.Domain.Models;
 using AspektAssignment.Dtos.CountryDtos;
 using AspektAssignment.Mappers.CountryMappers;
 using AspektAssignment.Services.Interface;
+using AspektAssignment.Shared.CustomExceptions;
 
 namespace AspektAssignment.Services.Implementation
 {
@@ -19,6 +20,12 @@ namespace AspektAssignment.Services.Implementation
 
         public async Task<int> Create(CreateCountryDto createCountryDto)
         {
+            var countries = await _countryRepository.Get();
+
+            if (countries.Any(x => x.Name.Equals(createCountryDto.Name, StringComparison.CurrentCultureIgnoreCase)))
+            {
+                throw new InvalidNameException($"The country name {createCountryDto.Name} already exists");
+            }
             return await _countryRepository.Create(createCountryDto.ToCountryDomain());
         }
 
@@ -36,7 +43,7 @@ namespace AspektAssignment.Services.Implementation
         public async Task<CountryDto> GetById(int id)
         {
             var country = await _countryRepository.GetById(id);
-            return country.ToCountryDto();
+            return country.ToCountryDto() ?? throw new CountryNotFoundException($"Country with id {id} does not exist!"); ;
         }
 
         public async Task<Dictionary<string, int>> GetCompanyStatisticsByCountryId(int id)
@@ -49,7 +56,18 @@ namespace AspektAssignment.Services.Implementation
 
         public async Task<CountryDto> Update(CountryDto countryDto)
         {
-            var foundCountry = await _countryRepository.GetById(countryDto.Id);
+            var foundCountry = await _countryRepository.GetById(countryDto.Id) ?? throw new CompanyNotFoundException($"Country with id {countryDto.Id} does not exist!");
+
+            if(foundCountry.Name != countryDto.Name) 
+            {
+                    var countries = await _countryRepository.Get();
+
+                    if (countries.Any(x => x.Name.Equals(countryDto.Name, StringComparison.CurrentCultureIgnoreCase)))
+                    {
+                        throw new InvalidNameException($"The country name {countryDto.Name} already exists");
+                    }
+            }
+
             foundCountry.Name = countryDto.Name;
 
             var updatedCountry = await _countryRepository.Update(foundCountry);

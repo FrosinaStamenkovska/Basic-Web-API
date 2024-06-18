@@ -11,6 +11,7 @@
     <ProjectReference Include="..\AspektAssignment.Domain\AspektAssignment.Domain.csproj" />
     <ProjectReference Include="..\AspektAssignment.Dtos\AspektAssignment.Dtos.csproj" />
     <ProjectReference Include="..\AspektAssignment.Mappers\AspektAssignment.Mappers.csproj" />
+    <ProjectReference Include="..\AspektAssignment.Shared\AspektAssignment.Shared.csproj" />
   </ItemGroup>
 
 </Project>

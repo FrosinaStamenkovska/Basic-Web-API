@@ -1,5 +1,7 @@
 ﻿using AspektAssignment.Dtos.ContactDtos;
 using AspektAssignment.Services.Interface;
+using AspektAssignment.Services.Validations;
+using AspektAssignment.Shared.CustomExceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspektAssignment.Project.Controllers
@@ -36,7 +38,7 @@ namespace AspektAssignment.Project.Controllers
             {
                 return Ok(await _contactService.GetById(id));
             }
-            catch (KeyNotFoundException ex)
+            catch (ContactNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
@@ -53,10 +55,6 @@ namespace AspektAssignment.Project.Controllers
             {
                 return Ok(await _contactService.GetContactsWithCompanyAndCountry());
             }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Internal Server Error: {ex.Message}");
@@ -71,10 +69,6 @@ namespace AspektAssignment.Project.Controllers
             {
                 return Ok(await _contactService.FilterContacts(countryId, companyId));
             }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Internal Server Error: {ex.Message}");
@@ -85,13 +79,23 @@ namespace AspektAssignment.Project.Controllers
         [HttpPost("CreateContact")]
         public async Task<IActionResult> CreateContact(CreateContactDto contact)
         {
+            if (!NameValidation.IsNameValid(contact.Name)) return BadRequest("Invalid Name!");
+
             try
             {
                 return Ok(await _contactService.Create(contact));
             }
-            catch (ArgumentNullException ex)
+            catch (InvalidNameException ex)
             {
                 return BadRequest(ex.Message);
+            }
+            catch (CompanyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (CountryNotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
@@ -102,17 +106,27 @@ namespace AspektAssignment.Project.Controllers
         [HttpPut("UpdateContact")]
         public async Task<IActionResult> UpdateContact(ContactDto contact)
         {
+            if (!NameValidation.IsNameValid(contact.Name)) return BadRequest("Invalid Name!");
+
             try
             {
                 return Ok(await _contactService.Update(contact));
             }
-            catch (KeyNotFoundException ex)
+            catch (ContactNotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch (ArgumentNullException ex)
+            catch (InvalidNameException ex)
             {
                 return BadRequest(ex.Message);
+            }
+            catch (CompanyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (CountryNotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {

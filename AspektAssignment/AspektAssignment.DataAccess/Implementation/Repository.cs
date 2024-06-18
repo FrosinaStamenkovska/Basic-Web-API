@@ -23,10 +23,9 @@ namespace AspektAssignment.DataAccess.Implementation
 
         public async Task Delete(int id)
         {
-            var entity = await GetById(id);
+            var entity = await GetById(id) ?? throw new KeyNotFoundException("Entity does not exist!");
             _dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync();
-
         }
 
         public async Task<List<T>> Get()
@@ -36,7 +35,7 @@ namespace AspektAssignment.DataAccess.Implementation
 
         public async Task<T> GetById(int id)
         {
-            return await _dbContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id) ?? throw new KeyNotFoundException("Entity does not exists!"); ;
+            return await _dbContext.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<T> Update(T entity)
