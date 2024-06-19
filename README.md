@@ -1,6 +1,7 @@
 **Basic-Web-API**
 
 **Overview**
+
 This is a ASP.NET Web Api application designed to manage data related to companies, countries, and contacts. It employs an N-tier architecture, uses Entity Framework for ORM, and incorporates Serilog for logging. The application connects to an MS SQL database and includes a suite of unit tests to ensure code quality and reliability.
 
 **Features**
