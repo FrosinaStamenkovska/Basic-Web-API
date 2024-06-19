@@ -1,6 +1,5 @@
 ﻿using AspektAssignment.Dtos.CompanyDtos;
 using AspektAssignment.Services.Interface;
-using AspektAssignment.Services.Validations;
 using AspektAssignment.Shared.CustomExceptions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -52,7 +51,6 @@ namespace AspektAssignment.Project.Controllers
         [HttpPost("CreateCompany")]
         public async Task<IActionResult> CreateCompany(CreateCompanyDto company)
         {
-            if (!NameValidation.IsNameValid(company.Name)) return BadRequest("Invalid Name!");
 
             try
             {
@@ -71,8 +69,6 @@ namespace AspektAssignment.Project.Controllers
         [HttpPut("UpdateCompany")]
         public async Task<IActionResult> UpdateCompany(CompanyDto company)
         {
-            if (!NameValidation.IsNameValid(company.Name)) return BadRequest("Invalid Name!");
-
             try
             {
                 return Ok(await _companyService.Update(company));

@@ -1,6 +1,5 @@
 ﻿using AspektAssignment.Dtos.ContactDtos;
 using AspektAssignment.Services.Interface;
-using AspektAssignment.Services.Validations;
 using AspektAssignment.Shared.CustomExceptions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -79,15 +78,9 @@ namespace AspektAssignment.Project.Controllers
         [HttpPost("CreateContact")]
         public async Task<IActionResult> CreateContact(CreateContactDto contact)
         {
-            if (!NameValidation.IsNameValid(contact.Name)) return BadRequest("Invalid Name!");
-
             try
             {
                 return Ok(await _contactService.Create(contact));
-            }
-            catch (InvalidNameException ex)
-            {
-                return BadRequest(ex.Message);
             }
             catch (CompanyNotFoundException ex)
             {
@@ -106,8 +99,6 @@ namespace AspektAssignment.Project.Controllers
         [HttpPut("UpdateContact")]
         public async Task<IActionResult> UpdateContact(ContactDto contact)
         {
-            if (!NameValidation.IsNameValid(contact.Name)) return BadRequest("Invalid Name!");
-
             try
             {
                 return Ok(await _contactService.Update(contact));
@@ -115,10 +106,6 @@ namespace AspektAssignment.Project.Controllers
             catch (ContactNotFoundException ex)
             {
                 return NotFound(ex.Message);
-            }
-            catch (InvalidNameException ex)
-            {
-                return BadRequest(ex.Message);
             }
             catch (CompanyNotFoundException ex)
             {

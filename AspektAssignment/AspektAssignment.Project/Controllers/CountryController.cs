@@ -1,6 +1,5 @@
 ﻿using AspektAssignment.Dtos.CountryDtos;
 using AspektAssignment.Services.Interface;
-using AspektAssignment.Services.Validations;
 using AspektAssignment.Shared.CustomExceptions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -70,8 +69,6 @@ namespace AspektAssignment.Project.Controllers
         [HttpPost("CreateCountry")]
         public async Task<IActionResult> CreateCountry(CreateCountryDto country)
         {
-            if (!NameValidation.IsNameValid(country.Name)) return BadRequest("Invalid Name!");
-
             try
             {
                 return Ok(await _countryService.Create(country));
@@ -89,8 +86,6 @@ namespace AspektAssignment.Project.Controllers
         [HttpPut("UpdateCountry")]
         public async Task<IActionResult> UpdateCountry(CountryDto country)
         {
-            if (!NameValidation.IsNameValid(country.Name)) return BadRequest("Invalid Name!");
-
             try
             {
                 return Ok(await _countryService.Update(country));
